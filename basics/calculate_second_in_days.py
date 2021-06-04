@@ -7,17 +7,21 @@ def from_days_to_seconds(number_of_days):
 
 
 def validate_and_execute():
-    if user_input.isdigit():
-        number_of_days = int(user_input)
+    try:
+        number_of_days = int(num_of_day)
         if number_of_days > 0:
-            return from_days_to_seconds(int(user_input))
+            return from_days_to_seconds(number_of_days)
         elif number_of_days == 0:
             return "Please enter value greater than 0"
-        else:
-            return "Please enter a positive value"
-    else:
-        return "Please enter numeric value"
+        elif number_of_days < 0:
+            return "Please enter value positive value"
+
+    except ValueError:
+        return f"Error while processing input {num_of_day}, Please enter numeric value!!"
 
 
-user_input = input("please enter number of days to convert \n")
-print(validate_and_execute())
+user_input = ""
+while user_input != "exit":
+    user_input = input("Hey user, please provide number of days in comma separated values, for ex: 10,40,23 \n")
+    for num_of_day in user_input.split(","):
+        print(validate_and_execute())
